@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Price Change</title>
     <link rel="icon" href="https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/hdwM43h8V6EeWHTA8Mxu/pub/0HnGoVRUn0BnbIqXvDVp.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         html, body {
             margin: 0;
@@ -14,7 +13,6 @@
             height: 100%;
             background-color: #eee;
             overflow: hidden;
-            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         .iframe-container {
@@ -30,143 +28,15 @@
             height: 100%;
             border: none;
         }
-
-        /* ===== Tombol Print Data ===== */
-        .print-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 24px;
-            border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #0f9b58, #0a7a45);
-            color: #fff;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(10,122,69,0.45), 0 0 0 0 rgba(15,155,88,0.3);
-            transition: all 0.2s cubic-bezier(.4,0,.2,1);
-            animation: breathe 2.5s ease-in-out infinite;
-        }
-
-        .print-btn:hover {
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 6px 28px rgba(10,122,69,0.55);
-            animation: none;
-        }
-
-        .print-btn:active {
-            transform: scale(0.96);
-        }
-
-        .print-btn i {
-            font-size: 18px;
-        }
-
-        @keyframes breathe {
-            0%, 100% { box-shadow: 0 4px 20px rgba(10,122,69,0.45), 0 0 0 0 rgba(15,155,88,0.3); }
-            50% { box-shadow: 0 4px 20px rgba(10,122,69,0.45), 0 0 0 10px rgba(15,155,88,0); }
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 90px;
-            right: 24px;
-            z-index: 10000;
-            background: rgba(0,0,0,0.85);
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
-        .toast.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
     <div class="iframe-container">
         <iframe
             id="app"
-            src="https://script.google.com/macros/s/AKfycbzJnCv_bIfC9sZzYthgsgbNI_98g3eR0q6Db8UheusVuxOF5DZOyiwQE959QMLr_u7y/exec"
+            src="https://script.google.com/macros/s/AKfycbxJJGTi2QWB1DslmcSnHrI62oEJGV2Q1LYTxc65Y5DgfX_CCg9NxQy071iLknQBvngj/exec"
             allow="fullscreen; camera; microphone; display-capture; geolocation">
         </iframe>
     </div>
-
-    <!-- Tombol Print Data -->
-    <button class="print-btn" id="printBtn" aria-label="Print Data">
-        <i class="fa-solid fa-print"></i>
-        Print Data
-    </button>
-
-    <!-- Toast -->
-    <div class="toast" id="toast">
-        <i class="fa-solid fa-circle-check" style="color:#4cff8e"></i>
-        <span id="toastMsg">Membuka halaman cetak...</span>
-    </div>
-
-    <script>
-        const PRINT_URL = 'https://script.google.com/macros/s/AKfycbzwb18HaQBlsPGIeWZp79mPVllBJW4HCVDIJ8BTUkRbd8c5BmuhUEYiGK3A6lyyg7RP/exec?page=print';
-
-        const printBtn = document.getElementById('printBtn');
-        const toast = document.getElementById('toast');
-        const toastMsg = document.getElementById('toastMsg');
-        let toastTimer = null;
-
-        function showToast(msg) {
-            if (toastTimer) clearTimeout(toastTimer);
-            toastMsg.textContent = msg;
-            toast.classList.add('visible');
-            toastTimer = setTimeout(() => toast.classList.remove('visible'), 2500);
-        }
-
-        printBtn.addEventListener('click', () => {
-            showToast('Membuka Print Data...');
-
-            const printWindow = window.open(PRINT_URL, '_blank');
-
-            if (printWindow) {
-                printWindow.addEventListener('load', () => {
-                    try {
-                        printWindow.document.documentElement.requestFullscreen().catch(() => {});
-                    } catch (e) {
-                        setTimeout(() => {
-                            try { printWindow.document.documentElement.requestFullscreen().catch(() => {}); } catch(e) {}
-                        }, 1000);
-                    }
-                });
-
-                setTimeout(() => {
-                    try { printWindow.document.documentElement.requestFullscreen().catch(() => {}); } catch(e) {}
-                }, 2000);
-            } else {
-                showToast('Pop-up diblokir, izinkan pop-up terlebih dahulu');
-            }
-        });
-
-        window.addEventListener('message', (e) => {
-            const data = e.data;
-            if (!data || typeof data !== 'object') return;
-
-            if (data.action === 'print') {
-                printBtn.click();
-            }
-        });
-    </script>
 </body>
 </html>
