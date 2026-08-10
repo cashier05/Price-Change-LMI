@@ -3,23 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price Change</title>
-    <link rel="icon" href="https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/hdwM43h8V6EeWHTA8Mxu/pub/0HnGoVRUn0BnbIqXvDVp.png" type="image/png">
+    <title>PRICE CHANGE-05</title>
+    <!-- Favicon Logo Lotte -->
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Lotte_logo.svg/512px-Lotte_logo.svg.png" type="image/png">
+    
+    <!-- Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #eee;
+            background-color: #f4f4f4;
+            font-family: 'Poppins', sans-serif;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* --- HEADER & LOGO --- */
+        .header {
+            background-color: #c8102e;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 0.12em;
+            line-height: 1;
+        }
+
+        .logo-sub {
+            font-weight: 400;
+            font-size: 0.8rem;
+            opacity: 0.9;
+            letter-spacing: 0.05em;
+            border-left: 1px solid rgba(255,255,255,0.5);
+            padding-left: 12px;
+        }
+
+        .header-btn {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background-color: rgba(255,255,255,0.35);
+        }
+
+        /* --- IFRAME CONTAINER --- */
         .iframe-container {
             width: 100%;
-            height: 100vh;
-            height: 100dvh;
+            flex-grow: 1;
+            position: relative;
             overflow: hidden;
+            background-color: #fff;
         }
 
         iframe {
@@ -28,15 +93,116 @@
             height: 100%;
             border: none;
         }
+
+        /* --- FALLBACK --- */
+        .fallback-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            z-index: 5;
+            transition: opacity 0.5s ease;
+        }
+
+        .fallback-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .fallback-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #ccc;
+        }
+
+        .fallback-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .fallback-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 24px;
+            max-width: 300px;
+        }
+
+        .fallback-btn {
+            background-color: #c8102e;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(200, 16, 46, 0.3);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .fallback-btn:hover {
+            background-color: #a50d24;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
+
+    <!-- HEADER LOGO LOTTE MART -->
+    <div class="header">
+        <div class="brand">
+            <div class="logo-text">LOTTE MART</div>
+            <div class="logo-sub">CASHIER LMI-05</div>
+        </div>
+        <a href="https://script.google.com/macros/s/AKfycbzJnCv_bIfC9sZzYthgsgbNI_98g3eR0q6Db8UheusVuxOF5DZOyiwQE959QMLr_u7y/exec" target="_blank" class="header-btn">
+            Buka di Tab Baru ↗
+        </a>
+    </div>
+
+    <!-- AREA IFRAME -->
     <div class="iframe-container">
+        
+        <!-- Fallback jika iframe diblokir -->
+        <div class="fallback-overlay" id="fallback">
+            <div class="fallback-icon">⚠️</div>
+            <div class="fallback-title">Tidak Dapat Memuat Aplikasi</div>
+            <div class="fallback-text">Browser memblokir tampilan aplikasi di dalam halaman ini. Silakan buka langsung melalui tombol di bawah.</div>
+            <a href="https://script.google.com/macros/s/AKfycbzJnCv_bIfC9sZzYthgsgbNI_98g3eR0q6Db8UheusVuxOF5DZOyiwQE959QMLr_u7y/exec" target="_blank" class="fallback-btn">
+                BUKA APLIKASI CASHIER
+            </a>
+        </div>
+
         <iframe
             id="app"
-            src="https://script.google.com/macros/s/AKfycbxJJGTi2QWB1DslmcSnHrI62oEJGV2Q1LYTxc65Y5DgfX_CCg9NxQy071iLknQBvngj/exec"
+            src="https://script.google.com/macros/s/AKfycbzJnCv_bIfC9sZzYthgsgbNI_98g3eR0q6Db8UheusVuxOF5DZOyiwQE959QMLr_u7y/exec"
             allow="fullscreen; camera; microphone; display-capture; geolocation">
         </iframe>
     </div>
+
+    <script>
+        const iframe = document.getElementById('app');
+        const fallback = document.getElementById('fallback');
+        let isLoaded = false;
+
+        iframe.onload = function() {
+            isLoaded = true;
+            fallback.classList.add('hidden');
+        };
+
+        setTimeout(() => {
+            if (!isLoaded) {
+                fallback.style.backgroundColor = "rgba(255, 255, 255, 0.95)";
+            }
+        }, 4000);
+    </script>
 </body>
 </html>
